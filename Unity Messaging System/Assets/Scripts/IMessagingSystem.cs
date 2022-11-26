@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace JGM.MessagingSystem
+﻿namespace JGM.MessagingSystem
 {
     public interface IMessagingSystem
     {

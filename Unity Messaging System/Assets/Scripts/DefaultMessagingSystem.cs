@@ -35,7 +35,7 @@ namespace JGM.MessagingSystem
             {
                 foreach (var subscriber in m_subscribers[message])
                 {
-                    subscriber.OnReceiveMessage(messageData);
+                    subscriber.OnReceiveMessage(message, messageData);
                 }
             }
         }

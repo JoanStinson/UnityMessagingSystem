@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
-
-namespace JGM.MessagingSystem
+﻿namespace JGM.MessagingSystem
 {
-    public interface IMessagingSubscriber 
+    public interface IMessagingSubscriber
     {
-        void OnReceiveMessage(object message);
+        void OnReceiveMessage(string message, object messageData);
     }
 }

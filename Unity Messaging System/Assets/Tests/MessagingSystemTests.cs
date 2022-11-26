@@ -4,62 +4,78 @@ using NUnit.Framework;
 
 namespace JGM.MessagingSystemTests
 {
+    public class MessageSubscriberExample : IMessagingSubscriber
+    {
+        public void OnReceiveMessage(string message, object messageData)
+        {
+            // solution: dictionary, doble despacho, interfaces
+            if (message == "3")
+            {
+
+            }
+            else if (message == "5")
+            {
+
+            }
+        }
+    }
+
     public class MessagingSystemTests
     {
+        private IMessagingSystem messagingSystem;
+        private Mock<IMessagingSubscriber> subscriberMock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            messagingSystem = new DefaultMessagingSystem();
+            subscriberMock = new Mock<IMessagingSubscriber>();
+        }
+
         [Test]
         public void When_SubscribedAndMessageDispatched_SubscriberMethodGetsCalledOnce()
         {
-            IMessagingSystem messagingSystem = new DefaultMessagingSystem();
-            Mock<IMessagingSubscriber> messagingSubscriber = new Mock<IMessagingSubscriber>();
-            messagingSystem.Subscribe("PlayerDeath", messagingSubscriber.Object);
+            messagingSystem.Subscribe("PlayerDeath", subscriberMock.Object);
             messagingSystem.Dispatch("PlayerDeath", 5);
-            messagingSubscriber.Verify(mock => mock.OnReceiveMessage(It.IsAny<object>()), Times.Once());
+            subscriberMock.Verify(mock => mock.OnReceiveMessage(It.IsAny<string>(), It.IsAny<object>()), Times.Once());
         }
 
         [Test]
         public void When_SubscribedThenUnsubscribedAndMessageDispatched_SubscriberMethodGetsCalledNever()
         {
-            IMessagingSystem messagingSystem = new DefaultMessagingSystem();
-            Mock<IMessagingSubscriber> messagingSubscriber = new Mock<IMessagingSubscriber>();
-            messagingSystem.Subscribe("PlayerDeath", messagingSubscriber.Object);
-            messagingSystem.Unsubscribe("PlayerDeath", messagingSubscriber.Object);
+            messagingSystem.Subscribe("PlayerDeath", subscriberMock.Object);
+            messagingSystem.Unsubscribe("PlayerDeath", subscriberMock.Object);
             messagingSystem.Dispatch("PlayerDeath", 5);
-            messagingSubscriber.Verify(mock => mock.OnReceiveMessage(It.IsAny<object>()), Times.Never());
+            subscriberMock.Verify(mock => mock.OnReceiveMessage(It.IsAny<string>(), It.IsAny<object>()), Times.Never());
         }
 
         [Test]
         public void When_SubscribedTwiceAndMessageDispatched_SubscriberMethodGetsCalledOnce()
         {
-            IMessagingSystem messagingSystem = new DefaultMessagingSystem();
-            Mock<IMessagingSubscriber> messagingSubscriber = new Mock<IMessagingSubscriber>();
-            messagingSystem.Subscribe("PlayerDeath", messagingSubscriber.Object);
-            messagingSystem.Subscribe("PlayerDeath", messagingSubscriber.Object);
+            messagingSystem.Subscribe("PlayerDeath", subscriberMock.Object);
+            messagingSystem.Subscribe("PlayerDeath", subscriberMock.Object);
             messagingSystem.Dispatch("PlayerDeath", 5);
-            messagingSubscriber.Verify(mock => mock.OnReceiveMessage(It.IsAny<object>()), Times.Once());
+            subscriberMock.Verify(mock => mock.OnReceiveMessage(It.IsAny<string>(), It.IsAny<object>()), Times.Once());
         }
 
         [Test]
         public void When_SubscribedThenUnsubscribedTwiceAndMessageDispatched_SubscriberMethodGetsCalledNever()
         {
-            IMessagingSystem messagingSystem = new DefaultMessagingSystem();
-            Mock<IMessagingSubscriber> messagingSubscriber = new Mock<IMessagingSubscriber>();
-            messagingSystem.Subscribe("PlayerDeath", messagingSubscriber.Object);
-            messagingSystem.Unsubscribe("PlayerDeath", messagingSubscriber.Object);
-            messagingSystem.Unsubscribe("PlayerDeath", messagingSubscriber.Object);
+            messagingSystem.Subscribe("PlayerDeath", subscriberMock.Object);
+            messagingSystem.Unsubscribe("PlayerDeath", subscriberMock.Object);
+            messagingSystem.Unsubscribe("PlayerDeath", subscriberMock.Object);
             messagingSystem.Dispatch("PlayerDeath", 5);
-            messagingSubscriber.Verify(mock => mock.OnReceiveMessage(It.IsAny<object>()), Times.Never());
+            subscriberMock.Verify(mock => mock.OnReceiveMessage(It.IsAny<string>(), It.IsAny<object>()), Times.Never());
         }
 
         [Test]
         public void When_SubscribedToTwoMessagesAndMessagesAreDispatched_SubscriberMethodsGetCalledOnce()
         {
-            IMessagingSystem messagingSystem = new DefaultMessagingSystem();
-            Mock<IMessagingSubscriber> messagingSubscriber = new Mock<IMessagingSubscriber>();
-            messagingSystem.Subscribe("PlayerDeath", messagingSubscriber.Object);
-            messagingSystem.Subscribe("PlayerRespawn", messagingSubscriber.Object);
+            messagingSystem.Subscribe("PlayerDeath", subscriberMock.Object);
+            messagingSystem.Subscribe("PlayerRespawn", subscriberMock.Object);
             messagingSystem.Dispatch("PlayerDeath", 6);
             messagingSystem.Dispatch("PlayerRespawn", 7);
-            messagingSubscriber.Verify(mock => mock.OnReceiveMessage(It.IsAny<object>()), Times.Exactly(2));
+            subscriberMock.Verify(mock => mock.OnReceiveMessage(It.IsAny<string>(), It.IsAny<object>()), Times.Exactly(2));
         }
     }
 }
