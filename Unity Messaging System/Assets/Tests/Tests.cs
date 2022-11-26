@@ -1,18 +1,19 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tests : MonoBehaviour
+public class Tests
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // can subscribe and receive event(s) when triggered
+    // can unscubscribe from events so that are not called when triggered
 
-    // Update is called once per frame
-    void Update()
+    [Test]
+    public void When_SubscribedToEventAndEventIsTriggered_SubscriberMethodGetsCalledOnce()
     {
-        
+        IMessagingSystem messagingSystem = new DefaultMessagingSystem();
+        ExampleClass exampleClass.Subscribe("PlayerDeath");
+        messagingSystem.SendEvent("PlayerDeath");
+
     }
 }
