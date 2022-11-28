@@ -12,7 +12,7 @@ namespace JGM.MessagingSystemTests
         [SetUp]
         public void SetUp()
         {
-            messagingSystem = new DefaultMessagingSystem();
+            messagingSystem = new MessagingSystem.MessagingSystem();
             playerDeathSubscriberMock = new Mock<IMessagingSubscriber<PlayerDeathMessage>>();
         }
 

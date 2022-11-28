@@ -4,18 +4,16 @@ namespace JGM.MessagingSystem
 {
     public class MessageSubscriberExample : MonoBehaviour, IMessagingSubscriber
     {
-        private readonly IMessagingSystem messagingSystem = new DefaultMessagingSystem();
-
         private void OnEnable()
         {
-            messagingSystem.Subscribe("PlayerDeath", this);
-            messagingSystem.Subscribe("PlayerRespawn", this);
+            MessagingSystem.Instance.Subscribe("PlayerDeath", this);
+            MessagingSystem.Instance.Subscribe("PlayerRespawn", this);
         }
 
         private void OnDisable()
         {
-            messagingSystem.Unsubscribe("PlayerDeath", this);
-            messagingSystem.Unsubscribe("PlayerRespawn", this);
+            MessagingSystem.Instance.Unsubscribe("PlayerDeath", this);
+            MessagingSystem.Instance.Unsubscribe("PlayerRespawn", this);
         }
 
         public void OnReceiveMessage(string message, object messageData)

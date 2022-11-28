@@ -6,18 +6,16 @@ namespace JGM.MessagingSystem
         IMessagingSubscriber<PlayerSpawnMessage>,
         IMessagingSubscriber<PlayerDeathMessage>
     {
-        private readonly IMessagingSystem messagingSystem = new DefaultMessagingSystem();
-
         private void OnEnable()
         {
-            messagingSystem.Subscribe<PlayerSpawnMessage>(this);
-            messagingSystem.Subscribe<PlayerDeathMessage>(this);
+            MessagingSystem.Instance.Subscribe<PlayerSpawnMessage>(this);
+            MessagingSystem.Instance.Subscribe<PlayerDeathMessage>(this);
         }
 
         private void OnDisable()
         {
-            messagingSystem.Unsubscribe<PlayerSpawnMessage>(this);
-            messagingSystem.Unsubscribe<PlayerDeathMessage>(this);
+            MessagingSystem.Instance.Unsubscribe<PlayerSpawnMessage>(this);
+            MessagingSystem.Instance.Unsubscribe<PlayerDeathMessage>(this);
         }
 
         public void OnReceiveMessage(PlayerSpawnMessage message)

@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JGM.MessagingSystem
 {
-    public class DefaultMessagingSystem : IMessagingSystem
+    public class MessagingSystem : IMessagingSystem
     {
+        public static MessagingSystem Instance => instance.Value;
+        private static readonly Lazy<MessagingSystem> instance = new Lazy<MessagingSystem>(() => new MessagingSystem());
+
         private readonly Dictionary<string, HashSet<IMessagingSubscriber>> m_messages;
 
-        public DefaultMessagingSystem()
+        public MessagingSystem()
         {
             m_messages = new Dictionary<string, HashSet<IMessagingSubscriber>>();
         }
