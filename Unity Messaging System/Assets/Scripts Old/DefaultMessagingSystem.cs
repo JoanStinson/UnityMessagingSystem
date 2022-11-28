@@ -4,36 +4,36 @@ namespace JGM.MessagingSystem
 {
     public class DefaultMessagingSystem : IMessagingSystem
     {
-        private readonly Dictionary<string, HashSet<IMessagingSubscriber>> m_subscribers;
+        private readonly Dictionary<string, HashSet<IMessagingSubscriber>> m_messages;
 
         public DefaultMessagingSystem()
         {
-            m_subscribers = new Dictionary<string, HashSet<IMessagingSubscriber>>();
+            m_messages = new Dictionary<string, HashSet<IMessagingSubscriber>>();
         }
 
         public void Subscribe(string message, IMessagingSubscriber subscriber)
         {
-            if (!m_subscribers.ContainsKey(message))
+            if (!m_messages.ContainsKey(message))
             {
-                m_subscribers[message] = new HashSet<IMessagingSubscriber>();
+                m_messages[message] = new HashSet<IMessagingSubscriber>();
             }
 
-            m_subscribers[message].Add(subscriber);
+            m_messages[message].Add(subscriber);
         }
 
         public void Unsubscribe(string message, IMessagingSubscriber subscriber)
         {
-            if (m_subscribers.ContainsKey(message))
+            if (m_messages.ContainsKey(message))
             {
-                m_subscribers[message].Remove(subscriber);
+                m_messages[message].Remove(subscriber);
             }
         }
 
         public void Dispatch(string message, object messageData)
         {
-            if (m_subscribers.ContainsKey(message))
+            if (m_messages.ContainsKey(message))
             {
-                foreach (var subscriber in m_subscribers[message])
+                foreach (var subscriber in m_messages[message])
                 {
                     subscriber.OnReceiveMessage(message, messageData);
                 }
