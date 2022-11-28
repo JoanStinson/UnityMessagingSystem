@@ -4,22 +4,6 @@ using NUnit.Framework;
 
 namespace JGM.MessagingSystemTests
 {
-    public class MessageSubscriberExample : IMessagingSubscriber
-    {
-        public void OnReceiveMessage(string message, object messageData)
-        {
-            // solution: dictionary, doble despacho, interfaces
-            if (message == "3")
-            {
-
-            }
-            else if (message == "5")
-            {
-
-            }
-        }
-    }
-
     public class MessagingSystemTests
     {
         private IMessagingSystem messagingSystem;
