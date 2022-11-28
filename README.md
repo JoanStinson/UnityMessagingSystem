@@ -45,7 +45,7 @@ If the message doesn't require data, you can have an empty class or struct too.
 public readonly struct PlayerDeathMessage { }
 ```
 
-* ### Step 2 - Inherit from IMessagingSubscriber explicitly defining the message and subscribe to it. 
+* ### Step 2 - Inherit from IMessagingSubscriber<<Type>> explicitly defining the message type and subscribe to it. 
 ```csharp
     public class MessagingSubscriberExample : MonoBehaviour,
         IMessagingSubscriber<PlayerSpawnMessage>,
