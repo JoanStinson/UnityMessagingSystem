@@ -53,14 +53,14 @@ public readonly struct PlayerDeathMessage { }
     {
         private void OnEnable()
         {
-            messagingSystem.Subscribe<PlayerSpawnMessage>(this);
-            messagingSystem.Subscribe<PlayerDeathMessage>(this);
+            MessagingSystem.Instance.Subscribe<PlayerSpawnMessage>(this);
+            MessagingSystem.Instance.Subscribe<PlayerDeathMessage>(this);
         }
 
         private void OnDisable()
         {
-            messagingSystem.Unsubscribe<PlayerSpawnMessage>(this);
-            messagingSystem.Unsubscribe<PlayerDeathMessage>(this);
+            MessagingSystem.Instance.Unsubscribe<PlayerSpawnMessage>(this);
+            MessagingSystem.Instance.Unsubscribe<PlayerDeathMessage>(this);
         }
 
         public void OnReceiveMessage(PlayerSpawnMessage message)
@@ -74,7 +74,7 @@ public readonly struct PlayerDeathMessage { }
         }
     }
 ```
-> You can make the DefaultMessagingSystem a static class to access it from anywhere. In my case, I prefer to inject the dependency, so that later on I can mock it and do unit tests, apart from having a different messaging system implementation if it where required.
+> You can make use of the DefaultMessagingSystem singleton via the Instance property. In my case, I prefer to inject the dependency, so that later on I can mock it and do unit tests, apart from having a different messaging system implementation if it where required.
 
 * ### Step 3 - Create a message instance and dispatch it.
 ```csharp
@@ -84,10 +84,16 @@ public class ExampleDispatcherClass : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            messagingSystem.Dispatch(new PlayerSpawnMessage(3, 5));
-            messagingSystem.Dispatch(new PlayerDeathMessage());
+            MessagingSystem.Instance.Dispatch(new PlayerSpawnMessage(3, 5));
+            MessagingSystem.Instance.Dispatch(new PlayerDeathMessage());
         }
     }
 }
 ```
-> The same as I said before, be sure to have the same instance referenced. Either by injecting it via a constructor/initialize method or making use of a static class or singleton instance (although less recommended for obvious reasons).
+> The same as I said before, be sure to have the same instance referenced. Either by injecting it via a constructor/initialize method or making use of the singleton instance (although less recommended for obvious reasons, unless you are a beginner).
+
+## 🔍 Bulletproof Tests
+Unit tested with 100% code coverage to be certain the messaging system implementation works properly.
+<p align="center">
+  <img src="https://github.com/JoanStinson/UnityMessagingSystem/blob/main/tests.PNG">
+</p>
