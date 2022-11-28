@@ -1,8 +1,4 @@
-﻿using JGM.MessagingSystem;
-using System.Collections;
-using UnityEngine;
-
-namespace JGM.MessagingSystem
+﻿namespace JGM.MessagingSystem
 {
     public class MessageSubscriberExample : IMessagingSubscriber
     {

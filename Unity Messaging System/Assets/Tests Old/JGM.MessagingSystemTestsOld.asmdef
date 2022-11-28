@@ -1,10 +1,10 @@
 {
-    "name": "JGM.MessagingSystemTests",
+    "name": "JGM.MessagingSystemTestsOld",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "JGM.MessagingSystem"
+        "JGM.MessagingSystemOld"
     ],
     "includePlatforms": [
         "Editor"
