@@ -21,3 +21,11 @@ A typesafe, lightweight Unity event bus messaging system that respects the Open-
     <img alt="Last Release" src="https://img.shields.io/github/v/release/JoanStinson/UnityMessagingSystem?include_prereleases&logo=Dropbox&color=yellow">
   </a>
 </p>
+
+<br>
+<p align="center">
+  <img src="https://github.com/JoanStinson/UnityMessagingSystem/blob/main/megaphone.PNG" width="30%" height="30%">
+</p>
+
+## 🖥️ How It Works
+For starters, import the package located in the
