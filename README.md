@@ -74,7 +74,7 @@ public readonly struct PlayerDeathMessage { }
         }
     }
 ```
-> You can make use of the DefaultMessagingSystem singleton via the Instance property. In my case, I prefer to inject the dependency, so that later on I can mock it and do unit tests, apart from having a different messaging system implementation if it where required.
+> You can make use of the <b>DefaultMessagingSystem singleton</b> via the <b>Instance</b> property. Nevertheless, I <b>prefer to inject the dependency</b>, so that later on I can mock it and do unit tests, apart from having a different messaging system implementation if it where required.
 
 * ### Step 3 - Create a message instance and dispatch it.
 ```csharp
@@ -90,9 +90,9 @@ public class ExampleDispatcherClass : MonoBehaviour
     }
 }
 ```
-> The same as I said before, be sure to have the same instance referenced. Either by injecting it via a constructor/initialize method or making use of the singleton instance (although less recommended for obvious reasons, unless you are a beginner).
+> The same as I said before, be sure to have the <b>same instance referenced</b>. Either by <b>injecting</b> it via a constructor/initialize method <b>or</b> making use of the <b>singleton Instance</b> (although less recommended for obvious reasons, unless you are a beginner).
 
-## 🔍 Bulletproof Tests
+## 🔍 Unit Tests
 Unit tested with 100% code coverage to be certain the messaging system implementation works properly.
 <p align="center">
   <img src="https://github.com/JoanStinson/UnityMessagingSystem/blob/main/tests.PNG">
