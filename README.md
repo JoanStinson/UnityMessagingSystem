@@ -1,5 +1,5 @@
 # Unity Messaging System
-A typesafe, lightweight Unity event bus messaging system that respects the Open-Closed principle.
+A typesafe, lightweight Unity message bus system that respects the Open-Closed principle.
 
 <p align="center">
   <a>
